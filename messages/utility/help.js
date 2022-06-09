@@ -1,8 +1,8 @@
-const { Message, Client } = require('discord.js');
+const { Client, Message } = require('discord.js');
 
 module.exports = {
-    name: 'test',
-    description: 'test',
+    name: 'help',
+    description: '',
     aliases: [],
     /**
      * @param {Client} client
@@ -10,6 +10,6 @@ module.exports = {
      * @param {String[]} args
      */
     run: async (client, message, args) => {
-        message.reply('pong')
+        return;
     },
 };

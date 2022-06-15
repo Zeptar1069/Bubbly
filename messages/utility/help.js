@@ -1,8 +1,9 @@
-const { Client, Message } = require('discord.js');
+const { EmbedBuilder, Client, Message } = require('discord.js');
 
 module.exports = {
     name: 'help',
-    description: '',
+    description: 'Stuck on something? Get help!',
+    category: 'utility',
     aliases: [],
     /**
      * @param {Client} client
@@ -10,6 +11,6 @@ module.exports = {
      * @param {String[]} args
      */
     run: async (client, message, args) => {
-        return;
+        
     },
 };

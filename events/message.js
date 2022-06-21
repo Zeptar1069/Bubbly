@@ -2,7 +2,7 @@ const { client } = require('../index');
 
 client.on('messageCreate', async (message) => {
   if(message.author.bot ||
-     !message.content.startsWith(client.prefix) ||
+     !message.content.startsWith('.') ||
      !message.guild
   ) return;
 

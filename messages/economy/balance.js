@@ -23,7 +23,7 @@ module.exports = {
           wallet: 500,
           bank: 500,
         });
-        profile.save()
+        profile.save();
       };
     } catch(error) {
       console.error(error);

@@ -40,9 +40,13 @@ module.exports = {
 
             if(profileDaily) {
                 if(profileDaily.check !== null && timeout - (Date.now() - profileDaily.check) > 0) {
-                    const timeleft = ms(timeout - (Date.now() - profileDaily.check));
-                    message.reply(`Come back after ${timeleft}`);
+                    const timeleft = ms(timeout - (Date.now() - profileDaily.check), { verbose: true, secondsDecimalDigits: 0 });
+                    const embedWait = new EmbedBuilder()
+                        .setTitle('You\'ve already claimed your daily')
+                        .setDescription(`Your next daily is ready in:\n**${timeleft}**`);
+                    message.reply({ embeds: [embedWait] });
                 } else {
+                    const embedClaim = new EmbedBuilder()
                     message.reply('You claimed it! Come back after 1 day!')
                     await balance.findOneAndUpdate({ userID: message.author.id, wallet: profileBalance.wallet + 300 });
                     await daily.findOneAndUpdate({ userID: message.author.id, check: Date.now() });

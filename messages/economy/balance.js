@@ -5,7 +5,7 @@ module.exports = {
   name: 'balance',
   description: 'Get to view your rich balance!',
   category: 'economy',
-  aliases: [],
+  aliases: ['bal'],
   /**
    * @param {Client} client
    * @param {Message} message

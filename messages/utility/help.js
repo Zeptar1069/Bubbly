@@ -1,4 +1,4 @@
-const { EmbedBuilder, Client, Message, ActionRow, ButtonBuilder } = require('discord.js');
+const { EmbedBuilder, Client, Message, ActionRowBuilder, SelectMenuBuilder } = require('discord.js');
 
 module.exports = {
     name: 'help',
@@ -18,7 +18,7 @@ module.exports = {
         const formatString = (str) =>
             str[0].toUpperCase() + str.slice(1).toLowerCase();
 
-        const categories = directories.map((dir) => {
+        let categories = directories.map((dir) => {
             const getCommands = client.commands.filter(
                 (cmd) => cmd.directory === dir
             ).map((cmd) => {
@@ -34,15 +34,32 @@ module.exports = {
             };
         });
 
-        const comp = new ActionRow().addComponents(
-            new ButtonBuilder()
-                .setCustomId('adv')
-                .setLabel('Test')
-                .setCustomId('primary')
+        const embedHelp = new EmbedBuilder()
+            .setTitle('Bubbly\'s Help Menu!')
+            .setDescription('Welcome to Bubbly\'s help menu.\nMy prefix for the serer is ` . ` (default)')
+            .setThumbnail('https://i.ibb.co/wyKC7k4/av.png')
+            .setColor(0x53a1f5);
+
+        categories = categories.slice(1);
+
+        const comp = new ActionRowBuilder().addComponents(
+            new SelectMenuBuilder()
+                .setCustomId('help-menu')
+                .setPlaceholder('Select a category')
+                .addOptions(
+                    categories.map((cmd) => {
+                        return {
+                            label: cmd.directory,
+                            value: cmd.directory.toLowerCase(),
+                            description: `Commands from ${cmd.directory} category`,
+                        };
+                    }),
+                ),
         );
 
-        console.log(comp)
-
-        message.channel.send({ content: 'Test', components: [comp] });
+        const msg = await message.channel.send({
+            embeds: [embedHelp],
+            components: [comp],
+        });
     },
 };

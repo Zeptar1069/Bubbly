@@ -1,4 +1,4 @@
-const { Client, Collection } = require('discord.js');
+const { Collection } = require('discord.js');
 const config = require('./config');
 const client = new (require('discord.js').Client)({ intents: [32767, 32768] });
 

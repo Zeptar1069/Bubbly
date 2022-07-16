@@ -3,7 +3,7 @@ const { inspect } = require('util');
 
 module.exports = {
     name: 'eval',
-    description: 'Evaluates the given code',
+    description: 'Evaluate the given code',
     category: 'developer',
     aliases: [],
     /**

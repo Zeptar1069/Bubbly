@@ -5,7 +5,7 @@ const ms = require('pretty-ms');
 
 module.exports = {
     name: 'daily',
-    description: 'Claim a bunch of money every day. Build a streak and increase the amount!',
+    description: 'Claim a stack of money every day',
     category: 'economy',
     aliases: [],
     /**

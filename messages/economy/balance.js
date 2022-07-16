@@ -3,7 +3,7 @@ const balance = require('../../schemas/balance');
 
 module.exports = {
   name: 'balance',
-  description: 'Get to view your rich balance!',
+  description: 'View your total balance',
   category: 'economy',
   aliases: ['bal'],
   /**

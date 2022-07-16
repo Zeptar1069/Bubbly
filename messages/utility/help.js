@@ -1,8 +1,8 @@
-const { EmbedBuilder, Client, Message, ActionRowBuilder, SelectMenuBuilder } = require('discord.js');
+const { EmbedBuilder, Client, Message, ActionRowBuilder, SelectMenuBuilder, ComponentType } = require('discord.js');
 
 module.exports = {
     name: 'help',
-    description: 'Stuck on something? Get help!',
+    description: 'The official help menu of Ali The Detective',
     category: 'utility',
     aliases: [],
     /**
@@ -36,7 +36,7 @@ module.exports = {
 
         const embedHelp = new EmbedBuilder()
             .setTitle('Bubbly\'s Help Menu!')
-            .setDescription('Welcome to Bubbly\'s help menu.\nMy prefix for the serer is ` . ` (default)')
+            .setDescription('Welcome to Bubbly\'s help menu!\nMy prefix for the serer is ` . ` (default)')
             .setThumbnail('https://i.ibb.co/wyKC7k4/av.png')
             .setColor(0x53a1f5);
 
@@ -57,9 +57,36 @@ module.exports = {
                 ),
         );
 
-        const msg = await message.channel.send({
-            embeds: [embedHelp],
-            components: [comp],
+        const msg = await message.channel.send({embeds: [embedHelp], components: [comp] });
+
+        const filter = (interaction) => interaction.user.id === message.author.id
+
+        const collector = msg.createMessageComponentCollector({ filter, componentType: ComponentType.SelectMenu, time: 30000 });
+
+        collector.on('collect', async (interaction) => {
+            const [ directory ] = interaction.values;
+            const category = categories.find((x) => x.directory.toLowerCase() === directory);
+
+            await interaction.deferUpdate()
+
+            const collectorEmbed = new EmbedBuilder()
+                .setTitle(directory[0].toUpperCase() + directory.slice(1) + ' Commands')
+                .addFields(
+                    category.commands.map((cmd) => {
+                        return {
+                            name: cmd.name,
+                            value: cmd.description,
+                        };
+                    }),
+                )
+                .setColor(0x53a1f5);
+
+            await interaction.editReply({ embeds: [collectorEmbed] });
+        });
+
+        collector.on('end', async (interaction) => {
+            comp.components[0].setDisabled(true);
+            await msg.edit({ components: [comp] });
         });
     },
 };

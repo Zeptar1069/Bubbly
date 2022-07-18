@@ -35,8 +35,8 @@ module.exports = {
         });
 
         const embedHelp = new EmbedBuilder()
-            .setTitle('Bubbly\'s Help Menu!')
-            .setDescription('Welcome to Bubbly\'s help menu!\nMy prefix for the serer is ` . ` (default)')
+            .setTitle('Ali The Detective')
+            .setDescription('Welcome to Ali The Detective\'s help menu!\nMy prefix for the serer is ` . ` (default)')
             .setThumbnail('https://i.ibb.co/wyKC7k4/av.png')
             .setColor(0x53a1f5);
 
@@ -67,7 +67,7 @@ module.exports = {
             const [ directory ] = interaction.values;
             const category = categories.find((x) => x.directory.toLowerCase() === directory);
 
-            await interaction.deferUpdate()
+            await interaction.deferUpdate();
 
             const collectorEmbed = new EmbedBuilder()
                 .setTitle(directory[0].toUpperCase() + directory.slice(1) + ' Commands')

@@ -7,7 +7,7 @@ const globPromise = require('util').promisify(glob);
  */
 
 module.exports = async (client) => {
-  const commandFiles = await globPromise(`${process.cwd()}/messages/**/*.js`);
+  const commandFiles = await globPromise(`${process.cwd()}/messages/*.js`);
   commandFiles.map((value) => {
     const file = require(value);
     const splitted = value.split('/');
